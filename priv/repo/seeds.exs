@@ -9,3 +9,11 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias Telnyx.{Repo, Product}
+
+Repo.get_by(Product, external_product_id: "12345") ||
+  Repo.insert!(%Product{
+                 external_product_id: "12345",
+                 product_name: "Nice Chair",
+                 price_in_cents: 3025
+               })
