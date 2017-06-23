@@ -15,3 +15,7 @@ config :telnyx, Telnyx.Repo,
   database: "telnyx_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :telnyx, Telnyx.OmegaPricingService,
+  endpoint: "http://mock-pricing.com/",
+  api_key: "omega-test-key"

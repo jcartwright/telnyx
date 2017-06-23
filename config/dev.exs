@@ -39,3 +39,7 @@ config :telnyx, Telnyx.Repo,
   database: "telnyx_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :telnyx, Telnyx.OmegaPricingService,
+  endpoint: "http://mock-pricing.com/",
+  api_key: "omega-dev-key"

@@ -56,6 +56,10 @@ config :logger, level: :info
 #     config :telnyx, Telnyx.Endpoint, server: true
 #
 
+config :telnyx, Telnyx.OmegaPricingService,
+  endpoint: "https://omegapricinginc.com/",
+  api_key: "" # This should be loaded from prod.secret.exs
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
