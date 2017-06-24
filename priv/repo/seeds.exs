@@ -12,17 +12,22 @@
 alias Telnyx.{Repo, Product}
 
 Repo.insert!(%Product{
-                external_product_id: "12345",
-                product_name: "Nice Chair",
-                price_in_cents: 40_25
+                external_product_id: "test-product",
+                product_name: "Test Product",
+                price_in_cents: 1_00
               })
 Repo.insert!(%Product{
-                external_product_id: "23456",
-                product_name: "Black & White TV",
-                price_in_cents: 43_77
+                external_product_id: "noop",
+                product_name: "No-Op Product",
+                price_in_cents: 1_00
               })
 Repo.insert!(%Product{
-                external_product_id: "ACME-WIDGET-001",
-                product_name: "Acme Widget 001",
-                price_in_cents: 100_000_00
+                external_product_id: "mismatch",
+                product_name: "Mismatch Product",
+                price_in_cents: 1_00
+              })
+Repo.insert!(%Product{
+                external_product_id: "update",
+                product_name: "Update Product",
+                price_in_cents: 1_00
               })

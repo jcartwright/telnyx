@@ -38,7 +38,8 @@ config :telnyx, Telnyx.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "telnyx_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool: Ecto.Adapters.SQL.Sandbox
+  # pool_size: 10
 
 config :telnyx, Telnyx.OmegaPricingService,
   endpoint: "http://mock-pricing.com/",

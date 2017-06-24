@@ -71,18 +71,44 @@ defmodule Telnyx.OmegaPricingService do
       body:
         %{pricingRecords: [
             %{
-              id: 12345,
-              name: "Nice Chair",
-              price: "$30.25",
+              # :noop represents a product that will not
+              # be updated as part of the refresh.
+              id: "noop",
+              name: "No-Op Product",
+              price: "$1.00",
               category: "home-furnishings",
               discontinued: false
             },
             %{
-              id: 234567,
-              name: "Black & White TV",
-              price: "$43.77",
+              # :mismatch represents a product that will
+              # match on external_product_id, but will
+              # have a product name mismatch.
+              id: "mismatch",
+              name: "[Discontinued] Mismatch Product",
+              price: "$0.00",
               category: "electronics",
               discontinued: true
+            },
+            %{
+              # :update represents a product that will
+              # generate a valid price change. The
+              # external_product_id and name will match,
+              # and the price will be different.
+              id: "update",
+              name: "Update Product",
+              price: "$2.00",
+              category: "misc",
+              discontinued: false
+            },
+            %{
+              # :insert represents a product that does
+              # not exist in our product database and 
+              # will be created on refresh.
+              id: "insert",
+              name: "New Product",
+              price: "$12.50",
+              category: "electronics",
+              discontinued: false
             }
         ]}
       }
