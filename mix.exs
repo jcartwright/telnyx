@@ -19,7 +19,7 @@ defmodule Telnyx.Mixfile do
   def application do
     [mod: {Telnyx, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :httpoison, :timex]]
+                    :phoenix_ecto, :postgrex, :httpoison, :timex, :number]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,6 +39,7 @@ defmodule Telnyx.Mixfile do
      {:gettext, "~> 0.11"},
      {:httpoison, "~> 0.11.1"},
      {:timex, "~> 3.0"},
+     {:number, "~> 0.5.1"},
      {:cowboy, "~> 1.0"}]
   end
 
