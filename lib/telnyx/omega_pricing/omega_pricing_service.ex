@@ -8,33 +8,46 @@ defmodule Telnyx.OmegaPricingService do
 
   ### Public API
 
-  def fetch_pricing_records do
+  def fetch_pricing_records(), 
+    do: fetch_pricing_records(Timex.shift(Timex.today, months: -1), Timex.today)
+
+  def fetch_pricing_records(start_date, end_date) do
     records =
-      fetch_pricing_data()
-      |> convert_to_product_records()
+      fetch_pricing_data(start_date, end_date)
+      |> convert_to_pricing_records()
     {:ok, records}
   end
 
-  def pricing_service_url do
+  def pricing_service_url(start_date, end_date) do
     "pricing/records.json?" <>
       URI.encode_query(%{
         api_key:    @api_key,
-        start_date: Timex.today,
-        end_date:   Timex.shift(Timex.today, months: -1)
+        start_date: start_date,
+        end_date:   end_date
       })
     |> process_url()
   end
 
   ### Private Methods
 
-  defp fetch_pricing_data() do
-    case make_request(:get, pricing_service_url()) do
+  defp fetch_pricing_data(start_date, end_date) do
+    case make_request(:get, pricing_service_url(start_date, end_date)) do
       {:ok, response} ->
         response[:body]
     end
   end
 
-  defp convert_to_product_records(%{pricingRecords: pricing_records}), do: pricing_records
+  defp convert_to_pricing_records(%{pricingRecords: pricing_records}) do
+    Enum.map pricing_records, fn raw ->
+      %Telnyx.OmegaPricingRecord{
+        id:           raw[:id],
+        name:         raw[:name],
+        price:        raw[:price],
+        category:     raw[:category],
+        discontinued: raw[:discontinued]
+      }
+    end
+  end
 
   ## HTTPoison overrides
 
